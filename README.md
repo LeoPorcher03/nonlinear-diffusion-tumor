@@ -34,7 +34,7 @@ Ces courbes sont conçues pour reproduire qualitativement le comportement observ
 **Paramètres utilisés :**
 
 $$
-\alpha \in \{0.5,\; 1,\; 2,\; 6\},
+\alpha \in \{0.5,\ 1,\ 2,\ 6\},
 \quad
 \beta = \frac{1}{2}.
 $$
