@@ -1,33 +1,64 @@
-# Diffusion rapide en 1D – Schéma volumes finis
+# Diffusion rapide en 1D — Schéma par volumes finis
 
-Ce dépôt contient une implémentation simple d’un schéma volumes finis implicite (maillage uniforme, conditions de Neumann) pour l’équation de diffusion rapide avec β = 1/2.
+Ce dépôt contient une implémentation numérique d’un schéma par **volumes finis implicite** (Euler arrière en temps, maillage uniforme, conditions de Neumann) pour l’équation de diffusion rapide en dimension 1 :
 
-Le code calcule et trace les entropies discrètes suivantes en fonction du temps, pour différentes valeurs de α : 
+$$
+u_t = (u^\beta)_{xx},
+\quad \text{avec } \beta = \frac{1}{2}.
+$$
 
-- log(E_d^α[u(t)])
-- log(F_d^α[u(t)])
+Le but principal de ce projet est de vérifier numériquement certaines propriétés théoriques du schéma à l’aide de quantités de type entropie.
 
-Ces graphes reproduisent le comportement observé dans la “Figure 6” de l’article de Chainais–Jüngel–Schuchnigg (2015).
+---
 
-## Points clés
-- Schéma implicite (Euler arrière) en temps
+## Entropies discrètes
 
-- Volumes finis en espace (1D, maillage uniforme)
+Le programme calcule et trace l’évolution en temps des entropies discrètes suivantes pour différentes valeurs du paramètre $\alpha$ :
 
-- Résolution par méthode de Newton amortie
+- $\log\!\left(E_d^\alpha[u(t)]\right)$  
+- $\log\!\left(F_d^\alpha[u(t)]\right)$  
 
-- Clamp pour garantir la non-négativité de la solution
+Ces courbes sont conçues pour reproduire qualitativement le comportement observé dans la **Figure 6** de l’article de référence.
 
-- Calcul des entropies discrètes E_d^α et F_d^α
+---
 
-- Paramètres utilisés : α ∈ {0.5, 1, 2, 6}, β = 1/2
+## Fonctionnalités principales
 
-## Lancer la simulation
-```bash
-python fast_diffusion_entropy_demo.py
-```
+- Schéma implicite (Euler arrière) en temps  
+- Discrétisation par volumes finis en espace (1D, maillage uniforme)  
+- Résolution du système non linéaire par méthode de Newton amortie  
+- Projection sur $\mathbb{R}^+$ pour garantir la positivité de la solution  
+- Calcul et visualisation des entropies discrètes $E_d^\alpha$ et $F_d^\alpha$  
+- Étude paramétrique en fonction de $\alpha$
+
+**Paramètres utilisés :**
+
+$$
+\alpha \in \{0.5,\; 1,\; 2,\; 6\},
+\quad
+\beta = \frac{1}{2}.
+$$
+
+---
 
 ## Objectif du projet
 
-L’objectif est de valider numériquement les propriétés théoriques des schémas volumes finis dans le cadre de la diffusion non linéaire. 
-Les résultats pourront ensuite être comparés ou étendus à des modèles plus complexes (dimensions supérieures, autres régimes de diffusion, modèles tumoraux, etc.).
+L’objectif est de :
+
+- valider numériquement les propriétés de dissipation d’entropie,  
+- illustrer la stabilité du schéma,  
+- vérifier la cohérence avec des résultats théoriques connus,  
+- fournir une base simple et reproductible pour l’étude de régimes de diffusion non linéaire.
+
+Ce travail constitue également une base pour des extensions futures :
+
+- dimension 2D ou 3D,  
+- autres valeurs de $\beta$,  
+- modèles physiques ou biologiques (par exemple diffusion tumorale),  
+- schémas numériques alternatifs.
+
+---
+
+## Référence
+
+Chainais, Jüngel, Schuchnigg (2015) — *Entropy structure and convergence of finite volume schemes for nonlinear diffusion equations*.
